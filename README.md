@@ -1,41 +1,71 @@
-Pacifica Sentinel 🌊 v1.0.0-beta
-The Active Liquidity Immune System for Perpetual DEXs
-Pacifica Sentinel is an autonomous, AI-driven infrastructure agent designed to safeguard the Pacifica ecosystem. By acting as a decentralized "Immune System," it monitors market health in real-time and intervenes to mitigate systemic risks, ensuring price stability and protecting users from predatory market conditions.
-🚩 The Problem: Liquidity Fragility
-In the fast-paced world of Perpetual Decentralized Exchanges (DEXs), extreme volatility often leads to liquidity gaps. When liquidity thins out:
- * Oracle Divergence: The exchange's Mark Price can deviate significantly from the actual Oracle Price, leading to unfair liquidations for honest traders.
- * Funding Rate Instability: Sudden price spikes or "Flash Crashes" distort funding mechanisms, imposing arbitrary costs on position holders.
- * Systemic Erosion of Trust: Recurring price anomalies discourage professional liquidity providers and institutional traders from committing capital.
-🛡️ Our Solution: The Sentinel Architecture
-Sentinel operates as a non-stop monitoring and execution layer. It doesn't just trade for profit; it trades for equilibrium.
-1. Autonomous Monitoring (The Pulse)
-Using Pacifica's low-latency WebSocket streams, Sentinel tracks the delta between Mark and Oracle prices across all supported symbols. It identifies "Liquidity Errors"—anomalies where the spread suggests a market failure rather than organic movement.
-2. The Liquidity Shield (Active Hedging)
-Upon detecting a critical deviation (e.g., >0.5%), Sentinel automatically triggers a Delta-Neutral Hedging strategy:
- * Market Balancing: Executes contra-position orders via the Pacifica Python SDK to absorb excess volatility and push the Mark Price back toward the Oracle anchor.
- * Risk Mitigation: By narrowing the price gap, Sentinel proactively prevents the liquidation engine from triggering on artificial price wicks.
-3. Funding Rate Stabilization
-Sentinel monitors next_funding estimates. By providing counter-flow liquidity during extreme imbalances, it helps normalize funding rates, đảm bảo cơ chế funding luôn là động lực lành mạnh cho sự hội tụ giá.
-🗺️ Roadmap & Versioning
-v1.0.0 (Hackathon Edition) - Current
- * [x] Initial Architecture & Core Logic.
- * [x] REST/WebSocket API Integration for real-time price monitoring.
- * [x] Price Deviation Analyzer (Mark vs. Oracle).
- * [ ] Automated Order Execution via Pacifica SDK.
- * [ ] Builder Program integration with builder_code.
-v1.1.0 (Post-Hackathon Optimization)
- * [ ] Multi-Pair Support: Scaling the immune system to all Pacifica trading pairs.
- * [ ] Dynamic Thresholds: AI-adjusted deviation thresholds based on historical volatility.
- * [ ] Enhanced Logging: Integrated dashboard for real-time "Health Status" visualization.
-🛠️ Technical Integration
- * SDK: Pacifica Python SDK (Official).
- * Data: GET /api/v1/info/prices & WebSocket prices stream.
- * Infrastructure: Cloud-native Python architecture designed for 24/7 reliability on secure environments.
-🤝 Connect with Small Piece Labs
-Small solutions, vital impact. 🏗️ Scaling Privacy.
-Chúng tôi tập trung vào việc xây dựng các công cụ công nghiệp và dân dụng ưu tiên quyền riêng tư, mang lại giá trị thực tiễn hơn là sự đầu cơ.
- * Email: smallpiecelabs@gmail.com
- * X (Twitter): @SmallPieceLabs
- * Telegram: t.me/SmallPieceLabs
- * YouTube: @smallpiecelabs
-Built exclusively for the Pacifica 2026 Hackathon.
+# Pacifica Sentinel 🌊 `v1.0.0-beta`
+> **The Active Liquidity Immune System for Perpetual DEXs**
+
+**Pacifica Sentinel** là một đại lý AI tự trị (Autonomous AI Agent), được thiết kế như một "Hệ thống miễn dịch" cho hệ sinh thái Pacifica. Hệ thống thực hiện giám sát sức khỏe thị trường theo thời gian thực và can thiệp để giảm thiểu rủi ro hệ thống, đảm bảo ổn định giá và bảo vệ người dùng khỏi các điều kiện thị trường tiêu cực.
+
+---
+
+## 🚩 The Problem: Liquidity Fragility
+
+Trong thế giới của các sàn giao dịch hợp đồng tương lai vĩnh cửu (**Perp DEXs**), sự biến động cực hạn thường dẫn đến lỗ hổng thanh khoản. Khi thanh khoản bị mỏng, các vấn đề sau nảy sinh:
+
+* **Oracle Divergence:** Giá trên sàn (Mark Price) lệch đáng kể so với giá thực (Oracle Price), gây thanh lý nhầm.
+* **Funding Rate Instability:** "Flash Crashes" làm biến dạng cơ chế Funding, gây chi phí phát sinh vô lý cho người dùng.
+* **Systemic Erosion of Trust:** Các sai lệch giá lặp đi lặp lại làm nản lòng các nhà cung cấp thanh khoản (LP) và các quỹ lớn.
+
+
+
+---
+
+## 🛡️ Our Solution: The Sentinel Architecture
+
+Sentinel vận hành như một lớp giám sát và thực thi không nghỉ. Nó không chỉ giao dịch vì lợi nhuận; nó giao dịch vì **Sự cân bằng (Equilibrium)**.
+
+### 1. Autonomous Monitoring (The Pulse)
+Sử dụng luồng dữ liệu **WebSocket** độ trễ thấp của Pacifica để theo dõi độ lệch giữa Mark Price và Oracle Price. Xác định chính xác các "Lỗi thanh khoản" (Liquidity Glitches) — những bất thường cho thấy sự thất bại của thị trường thay vì các chuyển động hữu cơ.
+
+### 2. The Liquidity Shield (Active Hedging)
+Khi phát hiện sai lệch nghiêm trọng (ví dụ: `>0.5%`), Sentinel tự động kích hoạt chiến lược **Delta-Neutral Hedging**:
+* **Market Balancing:** Thực hiện lệnh đối ứng qua *Pacifica Python SDK* để hấp thụ biến động và đẩy giá Mark trở lại mốc Oracle.
+* **Risk Mitigation:** Chủ động ngăn chặn công cụ thanh lý kích hoạt sai trên các "râu nến" (wicks) nhân tạo.
+
+### 3. Funding Rate Stabilization
+Giám sát `next_funding` và cung cấp thanh khoản đối lưu để bình ổn phí, đảm bảo cơ chế hội tụ giá luôn là động lực lành mạnh.
+
+---
+
+## 🗺️ Roadmap & Versioning
+
+### **v1.0.0 (Hackathon Edition) - Current**
+- [x] Initial Architecture & Core Logic.
+- [x] REST/WebSocket API Integration for real-time price monitoring.
+- [x] Price Deviation Analyzer (Mark vs. Oracle).
+- [ ] Automated Order Execution via Pacifica SDK.
+- [ ] Builder Program integration with `builder_code`.
+
+### **v1.1.0 (Post-Hackathon)**
+- [ ] **Multi-Pair Support:** Mở rộng hệ thống miễn dịch cho tất cả các cặp giao dịch.
+- [ ] **Dynamic Thresholds:** AI tự điều chỉnh ngưỡng sai lệch dựa trên biến động lịch sử.
+
+---
+
+## 🛠️ Technical Integration
+
+| Component | Technology |
+| :--- | :--- |
+| **SDK** | Pacifica Python SDK (Official) |
+| **Data Source** | `GET /api/v1/info/prices` & WebSocket stream |
+| **Infrastructure** | Python Cloud-native (24/7 Uptime) |
+
+---
+
+## 🤝 Connect with Small Piece Labs
+*Small solutions, vital impact. 🏗️ Scaling Privacy.*
+
+* **Email:** [smallpiecelabs@gmail.com](mailto:smallpiecelabs@gmail.com)
+* **X (Twitter):** [@SmallPieceLabs](https://x.com/SmallPieceLabs)
+* **Telegram:** [@platink](https://t.me/platink)
+* **YouTube:** [@smallpiecelabs](https://youtube.com/@smallpiecelabs)
+
+---
+*Built exclusively for the **Pacifica 2026 Hackathon**.*
