@@ -1,7 +1,11 @@
 # Pacifica Sentinel 🌊 `v1.0.0-beta`
 > **The Active Liquidity Immune System for Perpetual DEXs**
 
-**Pacifica Sentinel** is an autonomous AI agent designed as a "Liquidity Immune System" for the Pacifica ecosystem. The system performs real-time market health monitoring and intervenes to mitigate systemic risks, ensuring price stability and protecting users from adverse market conditions.
+[![Hackathon](https://img.shields.io/badge/Hackathon-Pacifica%202026-blueviolet)](https://dorahacks.io/)
+[![Version](https://img.shields.io/badge/Version-1.0.0--beta-green)](https://github.com/SmallPieceLabs/Pacifica-Sentinel)
+[![Powered by](https://img.shields.io/badge/Powered%20by-Tether%20WDK%20%26%20Pyth-orange)](https://tether.io)
+
+**Pacifica Sentinel** is an autonomous AI agent engineered as a "Liquidity Immune System" for the Pacifica ecosystem. Unlike traditional bots designed for capital extraction, Sentinel is built for **market stabilization**. It monitors real-time market health and intervenes during liquidity crises to mitigate systemic risks, ensuring fair pricing and protecting the community from artificial volatility.
 
 ---
 
@@ -9,9 +13,9 @@
 
 In the world of Perpetual Futures Exchanges (**Perp DEXs**), extreme volatility often leads to liquidity gaps. When liquidity becomes thin, the following issues arise:
 
-* **Oracle Divergence:** The on-chain price (Mark Price) deviates significantly from the fair asset value (Oracle Price), leading to unfair liquidations for traders.
+* **Artificial Liquidations (Wicks):** Thin order books allow small trades to create massive price spikes. This triggers liquidations even when the fair market value (**Oracle Price**) remains stable.
 * **Funding Rate Instability:** "Flash Crashes" distort funding mechanisms, causing unnecessary costs for position holders.
-* **Systemic Erosion of Trust:** Repeated price dislocations discourage professional liquidity providers (LPs) and institutional funds.
+* **Systemic Trust Erosion:** Price dislocations discourage professional liquidity providers (LPs) and institutional funds from committing capital.
 
 ---
 
@@ -20,15 +24,15 @@ In the world of Perpetual Futures Exchanges (**Perp DEXs**), extreme volatility 
 Sentinel operates as a non-stop monitoring and execution layer. It doesn't just trade for profit; it trades for **Equilibrium**.
 
 ### 1. Autonomous Monitoring (The Pulse)
-Utilizing Pacifica's low-latency **WebSocket** data streams, Sentinel tracks the spread between Mark and Oracle prices. It identifies "Liquidity Glitches"—anomalies indicating market failure rather than organic movements.
+Utilizing Pacifica's low-latency **WebSocket** and **Pyth Network’s Hermes API**, Sentinel tracks the spread between Mark and Oracle prices. It identifies "Liquidity Glitches"—anomalies indicating market failure rather than organic movements.
 
-### 2. The Liquidity Shield (Active Hedging)
-When critical deviation is detected (e.g., `>0.5%`), Sentinel automatically triggers **Delta-Neutral Hedging** strategies:
-* **Market Balancing:** Executes counter-orders via the *Pacifica Python SDK* to absorb volatility and push the Mark price back to the Oracle anchor.
-* **Risk Mitigation:** Proactively prevents liquidation engines from firing on artificial "wicks."
+### 2. Autonomous AI Agent (Powered by Tether WDK)
+Sentinel integrates the **Tether Wallet Development Kit (WDK)** to manage its own non-custodial identity. AI Skills allow the agent to evaluate market conditions and execute stabilizing trades autonomously when a "market wound" is detected.
 
-### 3. Funding Rate Stabilization
-Sentinel monitors `next_funding` estimates. By providing counter-flow liquidity, it helps stabilize funding fees, ensuring the mechanism remains a healthy driver for price convergence.
+### 3. Self-Preservation (Delta-Neutral Hedging)
+To ensure the "Immune System" operates 24/7 without capital depletion, Sentinel employs a **Delta-Neutral Strategy**:
+* **Active Balancing:** Executes counter-orders via the *Pacifica Python SDK* to absorb volatility.
+* **Risk Mitigation:** Simultaneously opens offsetting positions to keep total Delta near zero, protecting the system from directional market risk.
 
 ---
 
@@ -36,52 +40,55 @@ Sentinel monitors `next_funding` estimates. By providing counter-flow liquidity,
 
 ```mermaid
 graph TD
-    A[Pacifica WebSocket] -->|Real-time Price Feed| B(Price Deviation Analyzer)
-    C[Pacifica REST API] -->|Funding Rate Data| B
-    B -->|Deviation > Threshold| D{Sentinel Brain}
-    D -->|Check Safety| E[Risk Management Layer]
-    E -->|Execute Orders| F[Pacifica Python SDK]
-    F -->|Balance| G(Market Equilibrium)
-```
+    A[Pyth Hermes API] -->|Real-time Oracle| B(Price Deviation Analyzer)
+    C[Pacifica WebSocket] -->|Real-time Mark| B
+    B -->|Deviation > 0.5%| D{Sentinel Brain}
+    D -->|AI Skill Assessment| E[Risk Management Layer]
+    E -->|Tether WDK Signing| F[Pacifica Python SDK]
+    F -->|Stabilizing Trade| G((Market Equilibrium))
+    F -->|Offsetting Trade| H[Delta-Neutral Hedge]
 
----
+## 🗺️ Roadmap & Evolution
 
-## 🗺️ Roadmap & Versioning
-
-### v1.0.0 (Hackathon Edition) - Current
+### 🟢 v1.0.0: The Watcher (Hackathon Edition) - **Current**
 - [x] Initial Architecture & Core Logic.
-- [x] REST/WebSocket API Integration for real-time monitoring.
+- [x] Pyth Network & Pacifica REST/WS Integration.
 - [x] Price Deviation Analyzer (Mark vs. Oracle).
-- [ ] Risk Management Layer: Position and margin checks before execution.
-- [ ] Automated Order Execution via Pacifica SDK.
-- [ ] Builder Program integration with `builder_code`.
+- [x] **Builder Program** integration with `builder_code: SENTINEL`.
 
-### v1.1.0 (Post-Hackathon Optimization)
-- [ ] Multi-Pair Support: Expanding the immune system to all trading pairs.
-- [ ] Dynamic Thresholds: AI-driven adjustment of deviation triggers based on historical volatility.
-- [ ] Alerting System: Real-time Telegram/Discord notifications for liquidity anomalies.
+### 🟡 v1.5.0: The Agent (AI & WDK Integration)
+- [ ] Full **Tether WDK** integration for autonomous signing.
+- [ ] Development of **AI Skills** for dynamic trigger thresholds.
+- [ ] Implementation of position and margin safety checks.
 
-### v2.0.0 (The DeFi Composability Vision)
-- [ ] Public Sentinel Vaults: Allowing users to deposit liquidity into smart contracts to fund hedging operations, earning a share of Funding Rate yields and Builder rewards while securing the ecosystem.
+### 🟠 v2.0.0: The Sentinel (Full Hedging)
+- [ ] Deployment of the **Delta-Neutral Hedging** module.
+- [ ] Active Funding Rate stabilization logic.
+
+### 🔵 v2.5.0: The Guardian (Transparency)
+- [ ] Launch of the **Guardian Dashboard** (Streamlit) for real-time monitoring.
+- [ ] Community alerting system via Telegram/Discord.
 
 ---
 
-## 🛠️ Technical Integration
+## 🛠️ Technical Stack
 
 | Component | Technology |
-|---|---|
+| :--- | :--- |
 | **Language** | Python 3.10+ |
-| **SDK** | Pacifica Python SDK (Official) |
-| **Data Source** | `GET /api/v1/info/prices` & WebSocket stream |
+| **Identity/Wallet** | **Tether WDK** (Sponsor Tool) |
+| **Oracle Source** | **Pyth Network** (Hermes API) |
+| **Execution** | Pacifica Python SDK |
 | **Infrastructure** | Python Cloud-native (24/7 Uptime) |
+| **AI Layer** | LangChain & OpenAI |
 
 ---
 
 ## 🤝 Connect with Small Piece Labs
 
-*Small solutions, vital impact. 🏗️ Scaling Privacy.*
+*Small solutions, vital impact. 🏗️ Scaling the future of DeFi stability.*
 
-* 📧 **Email:** smallpiecelabs@gmail.com
+* 📧 **Email:** [smallpiecelabs@gmail.com](mailto:smallpiecelabs@gmail.com)
 * 🐦 **X (Twitter):** [@SmallPieceLabs](https://twitter.com/SmallPieceLabs)
 * 📺 **YouTube:** [@smallpiecelabs](https://youtube.com/@smallpiecelabs)
 * 💬 **Telegram:** [@platink](https://t.me/platink)
